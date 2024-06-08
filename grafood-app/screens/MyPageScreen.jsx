@@ -1,10 +1,17 @@
 import React from "react";
-import { View, Text, StyleSheet } from "react-native";
+import { View, Text, Pressable, StyleSheet } from "react-native";
 
-function MyPageScreen() {
+function MyPageScreen({ navigation }) {
   return (
     <View style={styles.container}>
       <Text>My Page!</Text>
+      <Pressable
+        onPress={() => {
+          navigation.navigate("ReviewPlus");
+        }}
+      >
+        <Text>Button</Text>
+      </Pressable>
     </View>
   );
 }

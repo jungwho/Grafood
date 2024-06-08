@@ -4,9 +4,9 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { AntDesign, MaterialIcons, FontAwesome } from "@expo/vector-icons";
 
-import SearchScreen from "./screens/SearchScreen";
-import ShareScreen from "./screens/ShareScreen";
-import MyPageScreen from "./screens/MyPageScreen";
+import SearchStackNavigator from "./screens/navigator/SearchStackNavigator";
+import ShareStackNavigator from "./screens/navigator/ShareStackNavigator";
+import MyPageStackNavigator from "./screens/navigator/MyPageStackNavigator";
 
 const Tab = createBottomTabNavigator();
 
@@ -49,7 +49,7 @@ export default function App() {
         >
           <Tab.Screen
             name="Search"
-            component={SearchScreen}
+            component={SearchStackNavigator}
             options={{
               tabBarLabel: "Search",
               tabBarActiveTintColor: "#FF3232",
@@ -57,7 +57,7 @@ export default function App() {
           />
           <Tab.Screen
             name="Share"
-            component={ShareScreen}
+            component={ShareStackNavigator}
             options={{
               tabBarLabel: "Share",
               tabBarActiveTintColor: "#D1D1D1",
@@ -65,7 +65,7 @@ export default function App() {
           />
           <Tab.Screen
             name="MyPage"
-            component={MyPageScreen}
+            component={MyPageStackNavigator}
             options={{
               tabBarLabel: "My Page",
               tabBarActiveTintColor: "#00A466",
