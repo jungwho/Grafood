@@ -1,29 +1,27 @@
-import React from "react";
-import { View, Text, Pressable, StyleSheet } from "react-native";
+import { Pressable, Text, View, StyleSheet } from "react-native";
 
-function MyPageScreen({ navigation }) {
+export default function RestaurantScreen({ navigation }) {
   return (
     <View style={styles.container}>
-      <Text>My Page!</Text>
+      {/* 서연코드작성 onpress 안에 함수는 건들지 말기! */}
       <Pressable
         onPress={() => {
-          navigation.navigate("ReviewPlus");
+          navigation.navigate("Location");
         }}
       >
-        <Text>GO_TO_REVIEW_PLUS</Text>
+        <Text>GO_TO_LOCATION</Text>
       </Pressable>
+
       <Pressable
         onPress={() => {
-          navigation.navigate("Profile");
+          navigation.navigate("ReviewGraph");
         }}
       >
-        <Text>GO_TO_PROFILE</Text>
+        <Text>GO_TO_REVIEW_GRAPH</Text>
       </Pressable>
     </View>
   );
 }
-
-export default MyPageScreen;
 
 const styles = StyleSheet.create({
   container: {

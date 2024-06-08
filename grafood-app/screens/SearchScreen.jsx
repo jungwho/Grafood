@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react";
-import { View, Text, StyleSheet } from "react-native";
+import { View, Text, StyleSheet, Pressable } from "react-native";
 import LoadingScreen from "./LoadingScreen";
 
-function SearchScreen() {
+function SearchScreen({ navigation }) {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
@@ -19,6 +19,13 @@ function SearchScreen() {
   return (
     <View style={styles.container}>
       <Text>Main Page!</Text>
+      <Pressable
+        onPress={() => {
+          navigation.navigate("Restaurant");
+        }}
+      >
+        <Text>GO_TO_RESTAURANT</Text>
+      </Pressable>
     </View>
   );
 }
