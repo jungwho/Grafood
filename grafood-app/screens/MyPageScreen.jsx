@@ -2,17 +2,13 @@ import React from "react";
 import { View, Text, Pressable, StyleSheet, Image, ScrollView } from "react-native";
 
 function MyPageScreen({ navigation }) {
-  // Example images array
+  // 사진 배열
   const images = [
     "https://via.placeholder.com/100",
     "https://via.placeholder.com/100",
     "https://via.placeholder.com/100",
-    "https://via.placeholder.com/100",
-    "https://via.placeholder.com/100",
-    "https://via.placeholder.com/100",
-    "https://via.placeholder.com/100",
-    "https://via.placeholder.com/100",
-    "https://via.placeholder.com/100",
+    
+    // 필요한 만큼 URL 추가
   ];
 
   return (
@@ -44,9 +40,11 @@ function MyPageScreen({ navigation }) {
       </View>
 
       <ScrollView contentContainerStyle={styles.gallery}>
-        {images.map((src, index) => (
-          <Image key={index} source={{ uri: src }} style={styles.image} />
-        ))}
+        <View style={styles.row}>
+          {images.map((src, index) => (
+            <Image key={index} source={{ uri: src }} style={styles.image} />
+          ))}
+        </View>
       </ScrollView>
     </View>
   );
@@ -112,6 +110,11 @@ const styles = StyleSheet.create({
     flexWrap: "wrap",
     justifyContent: "space-between",
     padding: 10,
+  },
+  row: {
+    flexDirection: "row",
+    flexWrap: "wrap",
+    justifyContent: "space-between",
   },
   image: {
     width: "30%",

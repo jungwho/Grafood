@@ -6,8 +6,8 @@ export default function RestaurantScreen({ navigation }) {
   const reviewCount = 198; // 리뷰 수 (예: 198)
 
   const photos = [
-    { id: '1', src: require('./assets/path_to_image1.jpg') },
-    { id: '2', src: require('./assets/path_to_image2.jpg') },
+    { id: '1', src: require('./path_to_image1.jpg') },
+    { id: '2', src: require('./path_to_image2.jpg') },
     // 여기에 더 많은 사진 경로를 추가
   ];
 
@@ -37,23 +37,23 @@ export default function RestaurantScreen({ navigation }) {
         keyExtractor={item => item.id}
         contentContainerStyle={styles.photoContainer}
       />
-      <Pressable
-        style={styles.navigateButton}
-        onPress={() => {
-          navigation.navigate("Location");
-        }}
-      >
-        <Text>GO_TO_LOCATION</Text>
-      </Pressable>
+      <View style={styles.navigationButtons}>
+        <Pressable
+          onPress={() => {
+            navigation.navigate("Location");
+          }}
+        >
+          <Text>GO_TO_LOCATION</Text>
+        </Pressable>
 
-      <Pressable
-        style={styles.navigateButton}
-        onPress={() => {
-          navigation.navigate("ReviewGraph");
-        }}
-      >
-        <Text>GO_TO_REVIEW_GRAPH</Text>
-      </Pressable>
+        <Pressable
+          onPress={() => {
+            navigation.navigate("ReviewGraph");
+          }}
+        >
+          <Text>GO_TO_REVIEW_GRAPH</Text>
+        </Pressable>
+      </View>
     </View>
   );
 }
@@ -94,10 +94,9 @@ const styles = StyleSheet.create({
     height: 150,
     margin: '1%',
   },
-  navigateButton: {
+  navigationButtons: {
+    justifyContent: "center",
     alignItems: "center",
-    padding: 10,
-    backgroundColor: "#DDDDDD",
-    margin: 5,
+    marginTop: 10,
   },
 });
