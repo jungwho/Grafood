@@ -9,7 +9,7 @@ import {
 } from "react-native";
 
 function MyPageScreen({ navigation }) {
-  return <View style={styles.container}>프로필과 통계를 포함한 헤더 섹션</View>;
+  return <View style={styles.container}></View>;
 }
 
 export default MyPageScreen;
