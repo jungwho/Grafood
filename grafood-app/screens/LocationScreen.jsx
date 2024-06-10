@@ -1,10 +1,21 @@
-import { View, Text } from "react-native";
+import React from 'react';
+import MapView from 'react-native-maps';
+import { StyleSheet, View } from 'react-native';
 
 export default function LocationScreen() {
   return (
-    <View>
-      {/* 진우 코드 작성 */}
-      <Text>Location Page</Text>
+    <View style={styles.container}>
+      <MapView style={styles.map} />
     </View>
   );
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+  },
+  map: {
+    width: '100%',
+    height: '100%',
+  },
+});
