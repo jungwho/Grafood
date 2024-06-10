@@ -1,19 +1,26 @@
-import { Pressable, Text, View, StyleSheet, FlatList, Image } from "react-native";
+import {
+  Pressable,
+  Text,
+  View,
+  StyleSheet,
+  FlatList,
+  Image,
+} from "react-native";
 
 export default function RestaurantScreen({ navigation }) {
-  const restaurantName = "구공탄곱창 본점";
-  const walkTime = 3; // 도보 시간 (예: 3분)
-  const reviewCount = 198; // 리뷰 수 (예: 198)
+  // const restaurantName = "구공탄곱창 본점";
+  // const walkTime = 3; // 도보 시간 (예: 3분)
+  // const reviewCount = 198; // 리뷰 수 (예: 198)
 
-  const photos = [
-    { id: '1', src: require('./path_to_image1.jpg') },
-    { id: '2', src: require('./path_to_image2.jpg') },
-    // 여기에 더 많은 사진 경로를 추가
-  ];
+  // const photos = [
+  //   { id: "1", src: require("./path_to_image1.jpg") },
+  //   { id: "2", src: require("./path_to_image2.jpg") },
+  //   // 여기에 더 많은 사진 경로를 추가
+  // ];
 
   return (
     <View style={styles.container}>
-      <View style={styles.header}>
+      {/* <View style={styles.header}>
         <View style={styles.headerLeft}>
           <Text style={styles.restaurantName}>{restaurantName}</Text>
           <Pressable onPress={() => navigation.navigate("LocationScreen")}>
@@ -36,7 +43,7 @@ export default function RestaurantScreen({ navigation }) {
         )}
         keyExtractor={item => item.id}
         contentContainerStyle={styles.photoContainer}
-      />
+      /> */}
       <Pressable
         style={styles.navigateButton}
         onPress={() => {
@@ -90,9 +97,9 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   photo: {
-    width: '48%',
+    width: "48%",
     height: 150,
-    margin: '1%',
+    margin: "1%",
   },
   navigateButton: {
     alignItems: "center",
