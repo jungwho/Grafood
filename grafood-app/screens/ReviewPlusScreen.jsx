@@ -11,6 +11,7 @@ import * as ImagePicker from "expo-image-picker";
 import Entypo from "@expo/vector-icons/Entypo";
 import BackButton from "../component/BackButton";
 import TasteSlider from "../component/TasteSlider";
+import * as FileSystem from "expo-file-system";
 
 function ReviewPlusScreen({ navigation }) {
   const [image, setImage] = useState(null);
@@ -33,6 +34,26 @@ function ReviewPlusScreen({ navigation }) {
       setImage(result.assets[0].uri);
     }
   };
+
+  const saveImage = async (imageUri) => {
+    const fileName = imageUri.split("/").pop();
+    const newPath = FileSystem.documentDirectory + fileName;
+
+    try {
+      await FileSystem.copyAsync({
+        from: imageUri,
+        to: newPath,
+      });
+      console.log("이미지가 저장되었습니다.");
+    } catch (error) {
+      console.error("이미지 저장 중 에러:", error);
+    }
+  };
+
+  const uploadReview = () => {
+    saveImage(image);
+    navigation.navigate("MyPage");
+  };
   return (
     <View style={styles.container}>
       <BackButton label="My Page" navigation={navigation} link="MyPage" />
@@ -52,20 +73,24 @@ function ReviewPlusScreen({ navigation }) {
             paddingHorizontal: 30,
             borderRadius: 7,
           }}
-          onPress={() => {
-            navigation.navigate("MyPage");
-          }}
+          onPress={uploadReview}
         >
           <Text style={{ color: "white" }}>Upload</Text>
         </Pressable>
       </View>
       <View style={styles.section}>
         <Text style={styles.title}>Select Restaurant</Text>
-        <TextInput style={[styles.input, { padding: 7.5 }]} />
+        <TextInput
+          style={[styles.input, { padding: 7.5 }]}
+          returnKeyType="done"
+        />
       </View>
       <View style={styles.section}>
         <Text style={styles.title}>Select Menu</Text>
-        <TextInput style={[styles.input, { padding: 7.5 }]} />
+        <TextInput
+          style={[styles.input, { padding: 7.5 }]}
+          returnKeyType="done"
+        />
       </View>
       <View style={styles.section}>
         <Text style={styles.title}>Add Photo</Text>

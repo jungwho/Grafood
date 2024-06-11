@@ -1,7 +1,15 @@
 import { useState, useEffect } from "react";
-import { View, Text, StyleSheet, Pressable, TextInput } from "react-native";
+import {
+  View,
+  Text,
+  StyleSheet,
+  Pressable,
+  TextInput,
+  ScrollView,
+} from "react-native";
 import { menuList1, menuList2, menuList3 } from "../database/menuDB";
 import { Feather } from "@expo/vector-icons";
+import { restaurantList } from "../database/restaurantDB";
 
 function SearchScreen({ navigation }) {
   const [menu1, setMenu1] = useState(menuList1[0]);
@@ -53,6 +61,7 @@ function SearchScreen({ navigation }) {
           placeholder="먹고 싶은 메뉴를 검색하세요!"
           value={recommendMenu}
           onChangeText={setRecommendMenu}
+          returnKeyType="search"
         />
         <View style={styles.orderContainer}>
           <Pressable>
@@ -63,15 +72,16 @@ function SearchScreen({ navigation }) {
           </Pressable>
         </View>
       </View>
-
-      <Text>Main Page!</Text>
-      <Pressable
-        onPress={() => {
-          navigation.navigate("Restaurant");
-        }}
-      >
-        <Text>GO_TO_RESTAURANT</Text>
-      </Pressable>
+      <ScrollView style={{ flex: 1, marginTop: 160 }}>
+        <Text>Main Page!</Text>
+        <Pressable
+          onPress={() => {
+            navigation.navigate("Location");
+          }}
+        >
+          <Text>location</Text>
+        </Pressable>
+      </ScrollView>
     </View>
   );
 }
@@ -88,10 +98,11 @@ const styles = StyleSheet.create({
   topContainer: {
     width: "100%",
     paddingHorizontal: 20,
-    paddingTop: 60,
+    paddingTop: 50,
     position: "absolute",
     top: 0,
     backgroundColor: "#efefef",
+    zIndex: 1,
   },
   recommendContainer: {
     display: "flex",
