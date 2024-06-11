@@ -17,7 +17,7 @@ export default function App() {
         <Tab.Navigator
           screenOptions={({ route }) => ({
             tabBarIcon: ({ focused, size }) => {
-              if (route.name === "Search") {
+              if (route.name === "tab1") {
                 return (
                   <AntDesign
                     name={"enviroment"}
@@ -25,7 +25,7 @@ export default function App() {
                     color={focused ? "#FF3232" : "gray"}
                   />
                 );
-              } else if (route.name === "Share") {
+              } else if (route.name === "tab2") {
                 return (
                   <MaterialIcons
                     name={"feed"}
@@ -33,7 +33,7 @@ export default function App() {
                     color={focused ? "#D1D1D1" : "gray"}
                   />
                 );
-              } else if (route.name === "MyPage") {
+              } else if (route.name === "tab3") {
                 return (
                   <FontAwesome
                     name={"user"}
@@ -48,7 +48,7 @@ export default function App() {
           })}
         >
           <Tab.Screen
-            name="Search"
+            name="tab1"
             component={SearchStackNavigator}
             options={{
               tabBarLabel: "Search",
@@ -56,7 +56,7 @@ export default function App() {
             }}
           />
           <Tab.Screen
-            name="Share"
+            name="tab2"
             component={ShareStackNavigator}
             options={{
               tabBarLabel: "Share",
@@ -64,7 +64,7 @@ export default function App() {
             }}
           />
           <Tab.Screen
-            name="MyPage"
+            name="tab3"
             component={MyPageStackNavigator}
             options={{
               tabBarLabel: "My Page",

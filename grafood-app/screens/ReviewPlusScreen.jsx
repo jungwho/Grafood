@@ -1,20 +1,101 @@
-import { StyleSheet, View, Text } from "react-native";
+import {
+  StyleSheet,
+  View,
+  Text,
+  TextInput,
+  Pressable,
+  Image,
+} from "react-native";
 import { useState } from "react";
+import * as ImagePicker from "expo-image-picker";
+import Entypo from "@expo/vector-icons/Entypo";
+import BackButton from "../component/BackButton";
+import TasteSlider from "../component/TasteSlider";
 
-function ReviewPlusScreen() {
+function ReviewPlusScreen({ navigation }) {
+  const [image, setImage] = useState(null);
+  const [spicy, setSpicy] = useState(0);
+  const [salty, setSalty] = useState(0);
+  const [sweet, setSweet] = useState(0);
+  const [quantity, setQuantity] = useState(0);
+
+  const pickImage = async () => {
+    let result = await ImagePicker.launchImageLibraryAsync({
+      mediaTypes: ImagePicker.MediaTypeOptions.All,
+      allowsEditing: true,
+      aspect: [4, 3],
+      quality: 1,
+    });
+
+    console.log(result);
+
+    if (!result.canceled) {
+      setImage(result.assets[0].uri);
+    }
+  };
   return (
     <View style={styles.container}>
+      <BackButton label="My Page" navigation={navigation} link="MyPage" />
+      <View
+        style={[
+          styles.section,
+          {
+            flexDirection: "row",
+            justifyContent: "flex-end",
+          },
+        ]}
+      >
+        <Pressable
+          style={{
+            backgroundColor: "#00a466",
+            paddingVertical: 5,
+            paddingHorizontal: 30,
+            borderRadius: 7,
+          }}
+          onPress={() => {
+            navigation.navigate("MyPage");
+          }}
+        >
+          <Text style={{ color: "white" }}>Upload</Text>
+        </Pressable>
+      </View>
       <View style={styles.section}>
         <Text style={styles.title}>Select Restaurant</Text>
+        <TextInput style={[styles.input, { padding: 7.5 }]} />
       </View>
       <View style={styles.section}>
         <Text style={styles.title}>Select Menu</Text>
+        <TextInput style={[styles.input, { padding: 7.5 }]} />
       </View>
       <View style={styles.section}>
         <Text style={styles.title}>Add Photo</Text>
+        <Pressable
+          style={[styles.input, styles.inputImage]}
+          onPress={pickImage}
+        >
+          {!image ? (
+            <Pressable onPress={pickImage}>
+              <Entypo name="circle-with-plus" size={40} color="#efefef" />
+            </Pressable>
+          ) : (
+            <View>
+              <Image source={{ uri: image }} style={styles.image} />
+            </View>
+          )}
+        </Pressable>
       </View>
       <View style={styles.section}>
         <Text style={styles.title}>Write Your Review</Text>
+        <View style={[styles.input, { paddingVertical: 20 }]}>
+          <TasteSlider label="Spicy" taste={spicy} setTaste={setSpicy} />
+          <TasteSlider label="Salty" taste={salty} setTaste={setSalty} />
+          <TasteSlider label="Sweet" taste={sweet} setTaste={setSweet} />
+          <TasteSlider
+            label="Quantity"
+            taste={quantity}
+            setTaste={setQuantity}
+          />
+        </View>
       </View>
     </View>
   );
@@ -27,13 +108,40 @@ const styles = StyleSheet.create({
     alignItems: "center",
     backgroundColor: "#efefef",
   },
+  backButton: {
+    display: "flex",
+    alignSelf: "flex-start",
+    paddingHorizontal: 10,
+    marginTop: 40,
+    marginBottom: 10,
+    flexDirection: "row",
+    alignItems: "center",
+  },
   section: {
     width: "100%",
     paddingHorizontal: 20,
-    marginVertical: 10,
+    marginVertical: 2,
   },
   title: {
     color: "#00a466",
+    fontSize: 15,
+    paddingLeft: 2.5,
+  },
+  input: {
+    width: "100%",
+    marginVertical: 3,
+    backgroundColor: "white",
+    borderRadius: 10,
+  },
+  inputImage: {
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    height: 200,
+  },
+  image: {
+    width: 180,
+    height: 180,
   },
 });
 export default ReviewPlusScreen;

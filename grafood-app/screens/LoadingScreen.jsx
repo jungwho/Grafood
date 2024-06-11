@@ -90,3 +90,17 @@ const styles = StyleSheet.create({
 });
 
 export default LoadingScreen;
+
+// const [isLoading, setIsLoading] = useState(true);
+
+// useEffect(() => {
+//   const timer = setTimeout(() => {
+//     setIsLoading(false);
+//   }, 3000);
+
+//   return () => clearTimeout(timer);
+// }, []);
+
+// if (isLoading) {
+//   return <LoadingScreen />;
+// }
