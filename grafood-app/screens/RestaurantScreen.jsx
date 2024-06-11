@@ -6,12 +6,12 @@ export default function RestaurantScreen({ navigation }) {
   const reviewCount = 198; // 리뷰 수 (예: 198)
 
   const photos = [
-    { id: '1', src: require('Grafood\grafood-app\assets\images\image1.png') },
-    { id: '2', src: require('Grafood\grafood-app\assets\images\image1.png') },
-    { id: '3', src: require('Grafood\grafood-app\assets\images\image1.png') },
-    { id: '4', src: require('Grafood\grafood-app\assets\images\image1.png') },
-    { id: '5', src: require('Grafood\grafood-app\assets\images\image1.png') },
-    { id: '6', src: require('Grafood\grafood-app\assets\images\image1.png') }
+    { id: '1', src: require('Grafood/grafood-app/assets/images/image1.png') },
+    { id: '2', src: require('Grafood/grafood-app/assets/images/image1.png') },
+    { id: '3', src: require('Grafood/grafood-app/assets/images/image1.png') },
+    { id: '4', src: require('Grafood/grafood-app/assets/images/image1.png') },
+    { id: '5', src: require('Grafood/grafood-app/assets/images/image1.png') },
+    { id: '6', src: require('Grafood/grafood-app/assets/images/image1.png') }
     // 여기에 더 많은 사진 경로를 추가
   ];
 
