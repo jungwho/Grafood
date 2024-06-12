@@ -66,7 +66,6 @@ function LoadingScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingTop: 5,
     flexDirection: "row",
     justifyContent: "center",
     alignItems: "center",
