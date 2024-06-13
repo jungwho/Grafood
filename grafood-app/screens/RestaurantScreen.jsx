@@ -8,12 +8,6 @@ export default function RestaurantScreen({ navigation }) {
   const route = useRoute();
   const { id } = route.params;
   const restaurant = restaurantList.find((rest) => rest.id === id);
-  const photos = [
-    { id: "1", image: require("../assets/images/restaurantImage/image02.png") },
-    { id: "2", image: require("../assets/images/restaurantImage/image02.png") },
-    { id: "3", image: require("../assets/images/restaurantImage/image02.png") },
-    { id: "4", image: require("../assets/images/restaurantImage/image02.png") },
-  ];
 
   return (
     <View style={styles.container}>
@@ -42,7 +36,14 @@ export default function RestaurantScreen({ navigation }) {
             <Text style={{ color: "#ff3232" }}>Location</Text>
           </Pressable>
           <Pressable style={styles.button}>
-            <Text style={{ color: "#ff3232" }}>Review</Text>
+            <Text
+              style={{ color: "#ff3232" }}
+              onPress={() =>
+                navigation.navigate("ReviewGraph", { id: restaurant.id })
+              }
+            >
+              Review
+            </Text>
           </Pressable>
         </View>
       </View>
@@ -95,27 +96,5 @@ const styles = StyleSheet.create({
     paddingVertical: 5,
     display: "flex",
     alignItems: "center",
-  },
-
-  pageTitle: {
-    fontSize: 24,
-    fontWeight: "bold",
-    textAlign: "center",
-    marginVertical: 10,
-  },
-  buttonsContainer: {
-    flexDirection: "row",
-    justifyContent: "space-around",
-    width: "100%",
-  },
-
-  photoContainer: {
-    justifyContent: "center",
-    alignItems: "center",
-  },
-  photo: {
-    width: "50%",
-    height: 200,
-    margin: "0%",
   },
 });

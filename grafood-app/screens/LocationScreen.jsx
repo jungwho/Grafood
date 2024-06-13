@@ -140,58 +140,6 @@ export default function LocationScreen({ navigation }) {
           }}
         />
       </MapView>
-      {/* <View style={styles.searchContainer}>
-        <TextInput
-          style={styles.searchInput}
-          placeholder="음식점 검색"
-          value={searchQuery}
-          onChangeText={(text) => setSearchQuery(text)}
-        />
-        <Button title="검색" onPress={handleSearch} />
-      </View> */}
-
-      {/* {placeDetails && (
-        <Modal
-          visible={modalVisible}
-          transparent={true}
-          animationType="slide"
-          onRequestClose={() => setModalVisible(false)}
-        >
-          <View style={styles.modalContainer}>
-            <View style={styles.modalContent}>
-              <ScrollView>
-                <Text style={styles.modalTitle}>{placeDetails.name}</Text>
-                <Text>{placeDetails.formatted_address}</Text>
-                <Text>평점: {placeDetails.rating}</Text>
-                {placeDetails.photos && placeDetails.photos.length > 0 && (
-                  <Image
-                    source={{
-                      uri: `https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=${placeDetails.photos[0].photo_reference}&key=AIzaSyC7zRLjr1x7K70vi2nHPJZg7_OaZMUI3EQ`,
-                    }}
-                    style={styles.photo}
-                  />
-                )}
-                {placeDetails.reviews &&
-                  placeDetails.reviews.length > 0 &&
-                  placeDetails.reviews.map((review, index) => (
-                    <View key={index} style={styles.review}>
-                      <Text style={styles.reviewAuthor}>
-                        {review.author_name}
-                      </Text>
-                      <Text>{review.text}</Text>
-                    </View>
-                  ))}
-                <TouchableOpacity
-                  style={styles.closeButton}
-                  onPress={() => setModalVisible(false)}
-                >
-                  <Text style={styles.closeButtonText}>닫기</Text>
-                </TouchableOpacity>
-              </ScrollView>
-            </View>
-          </View>
-        </Modal>
-      )} */}
     </View>
   );
 }
@@ -435,7 +383,7 @@ const styles = StyleSheet.create({
     paddingTop: 20,
     position: "absolute",
     top: 0,
-    backgroundColor: "rgba(200, 200, 200, 0.5)",
+    backgroundColor: "rgba(180, 180, 180, 0.5)",
     zIndex: 1,
     borderBottomLeftRadius: 10,
     borderBottomRightRadius: 10,

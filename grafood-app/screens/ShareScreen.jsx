@@ -1,10 +1,29 @@
 import React from "react";
-import { View, Text, StyleSheet } from "react-native";
+import {
+  View,
+  Text,
+  StyleSheet,
+  ScrollView,
+  Pressable,
+  Image,
+} from "react-native";
+import { shareList } from "../database/shareDB";
 
 function ShareScreen() {
   return (
     <View style={styles.container}>
-      <Text>Share Page!</Text>
+      <ScrollView style={{ width: "100%" }}>
+        {shareList.map((el, index) => (
+          <Pressable key={index}>
+            <View style={styles.listTopContainer}>
+              <Text style={{ fontSize: 16, color: "#666666" }}>{el.name}</Text>
+            </View>
+            {el.image && (
+              <Image source={el.image} style={{ width: "100%", height: 350 }} />
+            )}
+          </Pressable>
+        ))}
+      </ScrollView>
     </View>
   );
 }
@@ -17,5 +36,10 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     backgroundColor: "white",
+    paddingHorizontal: 20,
+    paddingTop: 50,
+  },
+  listTopContainer: {
+    marginVertical: 20,
   },
 });
