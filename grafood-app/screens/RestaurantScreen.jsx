@@ -17,25 +17,41 @@ export default function RestaurantScreen({ navigation }) {
   const { id } = route.params;
   const restaurant = restaurantList.find((rest) => rest.id === id);
 
-  // 랜덤한 사진을 가져오는 함수
+  // Function to get unique random images
   const getRandomImages = () => {
     let images = [];
+    let keys;
+    let foodPicList;
+
     if (restaurant.menu === "파스타") {
-      const pastaList = pastaPicList[0]; // pastaPicList의 첫 번째 요소를 사용
-      for (let i = 0; i < restaurant.review; i++) {
-        const keys = Object.keys(pastaList);
-        const randomKey = keys[Math.floor(Math.random() * keys.length)];
-        images.push(pastaList[randomKey]);
-      }
+      foodPicList = pastaPicList[0]; // pastaPicList의 첫 번째 요소를 사용
     } else if (restaurant.menu === "마라탕") {
-      const maraList = maraPicList[0]; // maraPicList의 첫 번째 요소를 사용
-      for (let i = 0; i < restaurant.review; i++) {
-        const keys = Object.keys(maraList);
-        const randomKey = keys[Math.floor(Math.random() * keys.length)];
-        images.push(maraList[randomKey]);
-      }
+      foodPicList = maraPicList[0]; // maraPicList의 첫 번째 요소를 사용
     }
+
+    keys = Object.keys(foodPicList);
+
+    // Shuffle keys array to randomize image selection
+    keys = shuffleArray(keys);
+
+    // Select unique images until we have enough for restaurant.review
+    let count = 0;
+    while (images.length < restaurant.review && count < keys.length) {
+      const randomKey = keys[count];
+      images.push(foodPicList[randomKey]);
+      count++;
+    }
+
     return images;
+  };
+
+  // Shuffle array function
+  const shuffleArray = (array) => {
+    for (let i = array.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [array[i], array[j]] = [array[j], array[i]];
+    }
+    return array;
   };
 
   const randomImages = getRandomImages();
@@ -87,7 +103,7 @@ export default function RestaurantScreen({ navigation }) {
         </View>
       </View>
 
-      {/* 랜덤 이미지 표시 */}
+      {/* Display random images */}
       <View style={{ marginTop: 20, paddingHorizontal: 20 }}>
         <ScrollView style={{ width: "100%" }}>
           {randomImages.map((image, index) => (
