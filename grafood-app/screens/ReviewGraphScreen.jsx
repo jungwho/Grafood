@@ -22,29 +22,62 @@ export default function ReviewGraphScreen({ navigation }) {
 
   return (
     <View style={styles.container}>
-      <BackButton label="Restaurant Page" navigation={navigation} />
-      <Text style={styles.title}> {restaurantName}의 인기 메뉴!!</Text>
-      <View style={styles.restaurantContainer}>
-        <Text style={styles.popularMenu}>1위: {restaurant.pop1st}</Text>
-        <Text style={styles.popularMenu}>2위: {restaurant.pop2nd}</Text>
-        <Text style={styles.popularMenu}>3위: {restaurant.pop3rd}</Text>
+      <View style={styles.listTopContainer}>
+        <Text style={{ fontSize: 18, color: "#666666" }}>
+          {restaurant.name}
+        </Text>
+        <View style={{ display: "flex", flexDirection: "row" }}>
+          <Text style={{ color: "#888888", fontSize: 15 }}>
+            도보 {restaurant.distance}분
+          </Text>
+          <Text style={{ marginLeft: 10, color: "#888888", fontSize: 15 }}>
+            리뷰 {restaurant.review}개
+          </Text>
+        </View>
       </View>
-      <Text style={styles.title}>맛 평균 수치는 어떨까?</Text>
-      <View style={styles.restaurantContainer}></View>
-
-      <Text style={styles.title}>평균 가격 vs {restaurantName} 가격</Text>
+      <BackButton label="Restaurant Page" navigation={navigation} />
+      <Text style={styles.title}>Best Menu</Text>
+      <View
+        style={[
+          styles.restaurantContainer,
+          {
+            flexDirection: "row",
+            justifyContent: "space-around",
+            paddingVertical: 20,
+          },
+        ]}
+      >
+        <Text
+          style={[styles.popularMenu, { marginBottom: 60, color: "#ff3232" }]}
+        >
+          1위 {restaurant.pop1st}
+        </Text>
+        <Text style={[styles.popularMenu, { marginTop: 30 }]}>
+          2위 {restaurant.pop2nd}
+        </Text>
+        <Text style={[styles.popularMenu, { marginTop: 60 }]}>
+          3위 {restaurant.pop3rd}
+        </Text>
+      </View>
+      <Text style={styles.title}>Price</Text>
       <View style={styles.restaurantContainer}>
         <View style={styles.moneyContainer}>
-          <Image
-            source={require("../assets/images/moneyImage/20000won.png")}
-            style={styles.image}
-            resizeMode="contain"
-          />
-          <Image
-            source={restaurant.money}
-            style={styles.image}
-            resizeMode="contain"
-          />
+          <View style={{ width: "50%", alignItems: "center" }}>
+            <Image
+              source={require("../assets/images/moneyImage/20000won.png")}
+              style={styles.image}
+              resizeMode="contain"
+            />
+            <Text style={{ marginTop: 10 }}>{restaurant.menu}</Text>
+          </View>
+          <View style={{ width: "50%", alignItems: "center" }}>
+            <Image
+              source={restaurant.money}
+              style={styles.image}
+              resizeMode="contain"
+            />
+            <Text style={{ marginTop: 10 }}>{restaurant.name}</Text>
+          </View>
         </View>
       </View>
     </View>
@@ -55,49 +88,37 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "#efefef",
-    paddingHorizontal: 20,
     paddingTop: 20,
   },
-  topContainer: {
-    width: "100%",
-    paddingHorizontal: 20,
-    paddingTop: 55,
-    position: "absolute",
-    top: 0,
-    backgroundColor: "#efefef",
-    zIndex: 1,
-    borderBottomLeftRadius: 10,
-    borderBottomRightRadius: 10,
-  },
+
   title: {
-    color: "#00a466",
-    textAlign: "center",
-    fontSize: 20,
-    fontWeight: "lighter",
-    marginBottom: 20,
+    marginHorizontal: 20,
+    marginTop: 15,
+    marginBottom: 10,
+    color: "#ff3232",
+    fontSize: 16,
   },
   restaurantContainer: {
-    backgroundColor: "#ffffff",
-    marginBottom: 20,
-    padding: 10,
-    borderWidth: 1,
-    borderColor: "#ccc",
-    borderRadius: 5,
+    marginHorizontal: 20,
+    backgroundColor: "white",
+    padding: 20,
+    borderRadius: 10,
   },
   moneyContainer: {
     flexDirection: "row",
-    justifyContent: "space-between",
+    justifyContent: "space-around",
     alignItems: "center",
+    width: "100%",
     marginBottom: 10,
-    padding: 10,
+    paddingVertical: 10,
   },
   image: {
-    width: "40%",
+    width: "70%",
     height: 80,
   },
   popularMenu: {
     fontSize: 16,
-    color: "#ff7e00",
+    color: "#666666",
   },
   errorText: {
     fontSize: 18,
