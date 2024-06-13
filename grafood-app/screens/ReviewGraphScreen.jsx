@@ -20,7 +20,7 @@ export default function ReviewGraphScreen({ navigation }) {
   return (
     <View style={styles.container}>
       <BackButton label={restaurant.name} navigation={navigation} />
-      <Text style={styles.title}>Best Menu</Text>
+      <Text style={[styles.title, { marginTop: 30 }]}>Best Menu</Text>
       <View
         style={[
           styles.restaurantContainer,
@@ -77,7 +77,7 @@ const styles = StyleSheet.create({
 
   title: {
     marginHorizontal: 20,
-    marginTop: 15,
+    marginTop: 20,
     marginBottom: 10,
     color: "#ff3232",
     fontSize: 16,

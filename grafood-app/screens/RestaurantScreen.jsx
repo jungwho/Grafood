@@ -11,6 +11,7 @@ import {
   ScrollView,
 } from "react-native";
 import BackButton from "../component/BackButton";
+import TasteSlider from "../component/TasteSlider";
 
 export default function RestaurantScreen({ navigation }) {
   const route = useRoute();
@@ -90,28 +91,56 @@ export default function RestaurantScreen({ navigation }) {
               { opacity: pressed ? 0.5 : 1 },
               styles.button,
             ]}
+            onPress={() =>
+              navigation.navigate("ReviewGraph", { id: restaurant.id })
+            }
           >
-            <Text
-              style={{ color: "#ff3232" }}
-              onPress={() =>
-                navigation.navigate("ReviewGraph", { id: restaurant.id })
-              }
-            >
-              Review
-            </Text>
+            <Text style={{ color: "#ff3232" }}>Review</Text>
           </Pressable>
         </View>
       </View>
 
       {/* Display random images */}
-      <View style={{ marginTop: 20, paddingHorizontal: 20 }}>
-        <ScrollView style={{ width: "100%" }}>
+      <View>
+        <ScrollView style={{ marginTop: 20 }}>
           {randomImages.map((image, index) => (
-            <Image
-              key={index}
-              source={image}
-              style={{ width: 400, height: 400, marginBottom: 10 }}
-            />
+            <View style={{ margin: 10 }} key={index}>
+              <Image source={image} style={{ width: 350, height: 300 }} />
+              <View
+                style={{
+                  position: "absolute",
+                  top: 0,
+                  right: 0,
+                  bottom: 0,
+                  left: 0,
+                  backgroundColor: "rgba(230, 230, 230, 0.6)",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                }}
+              >
+                <TasteSlider
+                  label="Spicy"
+                  taste={Math.random()}
+                  disabled={true}
+                />
+                <TasteSlider
+                  label="Salty"
+                  taste={Math.random()}
+                  disabled={true}
+                />
+                <TasteSlider
+                  label="sweet"
+                  taste={Math.random()}
+                  disabled={true}
+                />
+                <TasteSlider
+                  label="Quantity"
+                  taste={Math.random()}
+                  disabled={true}
+                />
+              </View>
+            </View>
           ))}
         </ScrollView>
       </View>
