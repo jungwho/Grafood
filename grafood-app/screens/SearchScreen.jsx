@@ -55,11 +55,15 @@ function SearchScreen({ navigation }) {
   };
 
   const searchPress = () => {
+    if (recommendMenu === "") {
+      return;
+    }
+
     setLoading(true);
     setTimeout(() => {
       setLoading(false);
       setSearch(true);
-    }, 2000);
+    }, 1500);
   };
 
   return (
@@ -116,6 +120,9 @@ function SearchScreen({ navigation }) {
             style={styles.input}
             placeholder="먹고 싶은 메뉴를 검색하세요!"
             value={recommendMenu}
+            onChange={() => {
+              setSearch(false);
+            }}
             onChangeText={setRecommendMenu}
             returnKeyType="done"
           />
@@ -127,18 +134,6 @@ function SearchScreen({ navigation }) {
             onPress={searchPress}
           >
             <Text style={{ color: "white", fontSize: 16 }}>Search</Text>
-          </Pressable>
-        </View>
-        <View>
-          <Pressable
-            style={styles.navigateButton}
-            onPress={() => {
-              navigation.navigate("Restaurant");
-            }}
-          >
-            <Text style={focused ? { color: "#666666" } : { color: "#a0a0a0" }}>
-            GO_TO_Restaurant
-            </Text>
           </Pressable>
         </View>
         <View style={styles.orderContainer}>
@@ -165,27 +160,48 @@ function SearchScreen({ navigation }) {
 
       {!loading && search && (
         <ScrollView style={{ flex: 1, marginTop: 155, width: "100%" }}>
-          {newList.map((el, index) => (
-            <Pressable key={index}>
-              <View style={styles.listTopContainer}>
-                <Text style={{ fontSize: 16, color: "#666666" }}>
-                  {el.name}
-                </Text>
-                <View style={{ display: "flex", flexDirection: "row" }}>
-                  <Text style={{ color: "#888888" }}>도보 {el.distance}분</Text>
-                  <Text style={{ marginLeft: 10, color: "#888888" }}>
-                    리뷰 {el.review}개
+          {newList.map((el, index) =>
+            recommendMenu === el.menu ? (
+              <Pressable
+                key={index}
+                onPress={() => {
+                  navigation.navigate("Restaurant", { id: el.id });
+                }}
+              >
+                <View style={styles.listTopContainer}>
+                  <Text style={{ fontSize: 16, color: "#666666" }}>
+                    {el.name}
                   </Text>
+                  <View style={{ display: "flex", flexDirection: "row" }}>
+                    <Text style={{ color: "#888888" }}>
+                      도보 {el.distance}분
+                    </Text>
+                    <Text style={{ marginLeft: 10, color: "#888888" }}>
+                      리뷰 {el.review}개
+                    </Text>
+                  </View>
                 </View>
-              </View>
-              {el.image && (
-                <Image
-                  source={el.image}
-                  style={{ width: "100%", height: 350 }}
-                />
-              )}
-            </Pressable>
-          ))}
+                {el.image && (
+                  <Image
+                    source={el.image}
+                    style={{ width: "100%", height: 350 }}
+                  />
+                )}
+              </Pressable>
+            ) : null
+          )}
+          {newList.every((el) => el.menu !== recommendMenu) && (
+            <Text
+              style={{
+                fontSize: 16,
+                color: "#666666",
+                textAlign: "center",
+                marginTop: 20,
+              }}
+            >
+              레스토랑이 존재하지 않습니다.
+            </Text>
+          )}
         </ScrollView>
       )}
     </View>
@@ -209,6 +225,8 @@ const styles = StyleSheet.create({
     top: 0,
     backgroundColor: "#efefef",
     zIndex: 1,
+    borderBottomLeftRadius: 10,
+    borderBottomRightRadius: 10,
   },
   recommendContainer: {
     display: "flex",

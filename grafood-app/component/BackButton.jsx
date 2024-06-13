@@ -1,12 +1,12 @@
 import { Pressable, Text, StyleSheet } from "react-native";
 import Ionicons from "@expo/vector-icons/Ionicons";
 
-export default function BackButton({ label, link, navigation }) {
+export default function BackButton({ label, navigation }) {
   return (
     <Pressable
       style={styles.backButton}
       onPress={() => {
-        navigation.navigate(link);
+        navigation.goBack();
       }}
     >
       <Ionicons name="arrow-back-sharp" size={15} color="#888888" />

@@ -20,6 +20,14 @@ function ReviewPlusScreen({ navigation }) {
   const [sweet, setSweet] = useState(0);
   const [quantity, setQuantity] = useState(0);
 
+  const reviewObj = {
+    image,
+    spicy,
+    salty,
+    sweet,
+    image,
+  };
+
   const pickImage = async () => {
     let result = await ImagePicker.launchImageLibraryAsync({
       mediaTypes: ImagePicker.MediaTypeOptions.All,
@@ -52,11 +60,11 @@ function ReviewPlusScreen({ navigation }) {
 
   const uploadReview = () => {
     saveImage(image);
-    navigation.navigate("MyPage");
+    navigation.navigate("MyPage", { reviews: reviewObj });
   };
   return (
     <View style={styles.container}>
-      <BackButton label="My Page" navigation={navigation} link="MyPage" />
+      <BackButton label="My Page" navigation={navigation} />
       <View
         style={[
           styles.section,
@@ -132,15 +140,6 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     backgroundColor: "#efefef",
-  },
-  backButton: {
-    display: "flex",
-    alignSelf: "flex-start",
-    paddingHorizontal: 10,
-    marginTop: 40,
-    marginBottom: 10,
-    flexDirection: "row",
-    alignItems: "center",
   },
   section: {
     width: "100%",
