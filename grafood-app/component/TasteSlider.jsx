@@ -1,14 +1,20 @@
 import { Slider } from "@ant-design/react-native";
 import { StyleSheet, View, Text } from "react-native";
 
-export default function TasteSlider({ label, taste, setTaste }) {
+export default function TasteSlider({ label, taste, setTaste, disabled }) {
   return (
     <View style={styles.inputBar}>
-      <Text style={{ color: "#666666" }}>{label}</Text>
+      <Text>{label}</Text>
       <View style={{ width: "70%" }}>
         <Slider
           minimumTrackTintColor="#00a466"
-          onAfterChange={(value) => setTaste(value)}
+          onAfterChange={(value) => {
+            if (!disabled && setTaste) {
+              setTaste(value);
+            }
+          }}
+          value={taste}
+          disabled={disabled}
         />
       </View>
       <Text style={{ width: "7%" }}>{Math.round(taste * 100)}</Text>

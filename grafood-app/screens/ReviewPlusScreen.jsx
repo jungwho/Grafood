@@ -15,16 +15,21 @@ import * as FileSystem from "expo-file-system";
 
 function ReviewPlusScreen({ navigation }) {
   const [image, setImage] = useState(null);
+  const [name, setName] = useState("");
+  const [menu, setMenu] = useState("");
   const [spicy, setSpicy] = useState(0);
   const [salty, setSalty] = useState(0);
   const [sweet, setSweet] = useState(0);
   const [quantity, setQuantity] = useState(0);
 
   const reviewObj = {
+    name,
+    menu,
     image,
     spicy,
     salty,
     sweet,
+    quantity,
     image,
   };
 
@@ -90,6 +95,8 @@ function ReviewPlusScreen({ navigation }) {
         <Text style={styles.title}>Select Restaurant</Text>
         <TextInput
           style={[styles.input, { padding: 7.5 }]}
+          onChangeText={setName}
+          value={name}
           returnKeyType="done"
         />
       </View>
@@ -97,6 +104,8 @@ function ReviewPlusScreen({ navigation }) {
         <Text style={styles.title}>Select Menu</Text>
         <TextInput
           style={[styles.input, { padding: 7.5 }]}
+          onChangeText={setMenu}
+          value={menu}
           returnKeyType="done"
         />
       </View>
