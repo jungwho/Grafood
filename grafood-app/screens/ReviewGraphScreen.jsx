@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { View, Text, StyleSheet, Image } from "react-native";
 import { useRoute } from "@react-navigation/native";
 import { restaurantList } from "../database/restaurantDB";
@@ -12,30 +12,14 @@ export default function ReviewGraphScreen({ navigation }) {
   if (!restaurant) {
     return (
       <View style={styles.container}>
-        <BackButton label="Restaurant Page" navigation={navigation} />
-        <Text style={styles.errorText}>해당 레스토랑을 찾을 수 없습니다.</Text>
+        <BackButton label={restaurant.name} navigation={navigation} />
       </View>
     );
   }
 
-  const restaurantName = restaurant.name;
-
   return (
     <View style={styles.container}>
-      <View style={styles.listTopContainer}>
-        <Text style={{ fontSize: 18, color: "#666666" }}>
-          {restaurant.name}
-        </Text>
-        <View style={{ display: "flex", flexDirection: "row" }}>
-          <Text style={{ color: "#888888", fontSize: 15 }}>
-            도보 {restaurant.distance}분
-          </Text>
-          <Text style={{ marginLeft: 10, color: "#888888", fontSize: 15 }}>
-            리뷰 {restaurant.review}개
-          </Text>
-        </View>
-      </View>
-      <BackButton label="Restaurant Page" navigation={navigation} />
+      <BackButton label={restaurant.name} navigation={navigation} />
       <Text style={styles.title}>Best Menu</Text>
       <View
         style={[
@@ -48,14 +32,14 @@ export default function ReviewGraphScreen({ navigation }) {
         ]}
       >
         <Text
-          style={[styles.popularMenu, { marginBottom: 60, color: "#ff3232" }]}
+          style={[styles.popularMenu, { marginBottom: 80, color: "#ff3232" }]}
         >
           1위 {restaurant.pop1st}
         </Text>
-        <Text style={[styles.popularMenu, { marginTop: 30 }]}>
+        <Text style={[styles.popularMenu, { marginTop: 40 }]}>
           2위 {restaurant.pop2nd}
         </Text>
-        <Text style={[styles.popularMenu, { marginTop: 60 }]}>
+        <Text style={[styles.popularMenu, { marginTop: 80 }]}>
           3위 {restaurant.pop3rd}
         </Text>
       </View>

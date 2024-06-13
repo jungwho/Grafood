@@ -2,7 +2,14 @@ import React from "react";
 import { useRoute } from "@react-navigation/native";
 import { restaurantList } from "../database/restaurantDB";
 import { pastaPicList, maraPicList } from "../database/foodpicDB";
-import { Pressable, Text, View, StyleSheet, Image, ScrollView } from "react-native";
+import {
+  Pressable,
+  Text,
+  View,
+  StyleSheet,
+  Image,
+  ScrollView,
+} from "react-native";
 import BackButton from "../component/BackButton";
 
 export default function RestaurantScreen({ navigation }) {
