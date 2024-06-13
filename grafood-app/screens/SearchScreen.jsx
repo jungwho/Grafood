@@ -137,12 +137,22 @@ function SearchScreen({ navigation }) {
           </Pressable>
         </View>
         <View style={styles.orderContainer}>
-          <Pressable onPress={sortListByDistance}>
+          <Pressable style={({ pressed }) => [
+                {
+                  opacity: pressed ? 0.5 : 1,
+                },
+              ]}
+              onPress={sortListByDistance}>
             <Text style={focused ? { color: "#666666" } : { color: "#a0a0a0" }}>
               가까운순
             </Text>
           </Pressable>
-          <Pressable onPress={sortListByReview}>
+          <Pressable style={({ pressed }) => [
+                {
+                  opacity: pressed ? 0.5 : 1,
+                },
+              ]}
+              onPress={sortListByReview}>
             <Text
               style={!focused ? { color: "#666666" } : { color: "#a0a0a0" }}
             >
@@ -162,7 +172,11 @@ function SearchScreen({ navigation }) {
         <ScrollView style={{ flex: 1, marginTop: 155, width: "100%" }}>
           {newList.map((el, index) =>
             recommendMenu === el.menu ? (
-              <Pressable
+              <Pressable style={({ pressed }) => [
+                {
+                  opacity: pressed ? 0.5 : 1,
+                },
+              ]}
                 key={index}
                 onPress={() => {
                   navigation.navigate("Restaurant", { id: el.id });

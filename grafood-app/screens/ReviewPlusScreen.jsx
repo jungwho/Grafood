@@ -80,12 +80,13 @@ function ReviewPlusScreen({ navigation }) {
         ]}
       >
         <Pressable
-          style={{
-            backgroundColor: "#00a466",
+          style={({ pressed }) => [
+            { opacity: pressed ? 0.5 : 1 },
+            {backgroundColor: "#00a466",
             paddingVertical: 5,
             paddingHorizontal: 30,
-            borderRadius: 7,
-          }}
+            borderRadius: 7},
+          ]}
           onPress={uploadReview}
         >
           <Text style={{ color: "white" }}>Upload</Text>

@@ -88,7 +88,10 @@ function MyPageScreen({ navigation, route }) {
         <View style={styles.buttonContainer}>
           {isEdit ? (
             <Pressable
-              style={styles.button}
+              style={({ pressed }) => [
+                { opacity: pressed ? 0.5 : 1 },
+                styles.button,
+              ]}
               onPress={() => {
                 setIsEdit(false);
               }}
@@ -97,7 +100,10 @@ function MyPageScreen({ navigation, route }) {
             </Pressable>
           ) : (
             <Pressable
-              style={styles.button}
+              style={({ pressed }) => [
+                { opacity: pressed ? 0.5 : 1 },
+                styles.button,
+              ]}
               onPress={() => {
                 setIsEdit(true);
               }}
@@ -107,7 +113,10 @@ function MyPageScreen({ navigation, route }) {
           )}
 
           <Pressable
-            style={styles.button}
+            style={({ pressed }) => [
+              { opacity: pressed ? 0.5 : 1 },
+              styles.button,
+            ]}
             onPress={() => {
               navigation.navigate("ReviewPlus");
             }}
@@ -157,14 +166,19 @@ function MyPageScreen({ navigation, route }) {
               onPress={() => {
                 setSelectedReview(null);
               }}
-              style={{
-                backgroundColor: "#00a466",
-                width: "30%",
-                borderRadius: 10,
-                justifyContent: "center",
-                alignItems: "center",
-                padding: 3,
-              }}
+              style={({ pressed }) => [
+                {
+                  opacity: pressed ? 0.5 : 1,
+                },
+                {
+                  backgroundColor: "#00a466",
+                  width: "30%",
+                  borderRadius: 10,
+                  justifyContent: "center",
+                  alignItems: "center",
+                  padding: 3,
+                },
+              ]}
             >
               <Text style={{ color: "white" }}>close</Text>
             </Pressable>
@@ -181,13 +195,24 @@ function MyPageScreen({ navigation, route }) {
         >
           {reviewList.map((el, index) => (
             <Pressable
+              style={({ pressed }) => [
+                {
+                  opacity: pressed ? 0.5 : 1,
+                },
+                { width: "33.3%" },
+              ]}
               key={index}
-              style={{ width: "33.3%" }}
               onPress={() => {
                 setSelectedReview(el);
               }}
             >
-              <Image source={{ uri: el.image }} style={styles.image} />
+              <Image
+                source={{ uri: el.image }}
+                style={[
+                  styles.image,
+                  selectedReview === el && styles.translucentImage,
+                ]}
+              />
             </Pressable>
           ))}
         </View>
@@ -248,7 +273,7 @@ const styles = StyleSheet.create({
   profileImage: {
     width: 75,
     height: 75,
-    borderRadius: "50%",
+    borderRadius: 50,
     backgroundColor: "#efefef",
     justifyContent: "center",
     alignItems: "center",
@@ -256,5 +281,8 @@ const styles = StyleSheet.create({
   image: {
     width: "100%",
     height: 125,
+  },
+  translucentImage: {
+    opacity: 0.5,
   },
 });

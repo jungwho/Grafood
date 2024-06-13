@@ -28,14 +28,21 @@ export default function RestaurantScreen({ navigation }) {
         </View>
         <View style={styles.buttonContainer}>
           <Pressable
-            style={styles.button}
+            style={({ pressed }) => [
+              { opacity: pressed ? 0.5 : 1 },
+              styles.button,
+            ]}
             onPress={() =>
               navigation.navigate("Location", { id: restaurant.id })
             }
           >
             <Text style={{ color: "#ff3232" }}>Location</Text>
           </Pressable>
-          <Pressable style={styles.button}>
+          <Pressable 
+          style={({ pressed }) => [
+            { opacity: pressed ? 0.5 : 1 },
+            styles.button,
+          ]}>
             <Text
               style={{ color: "#ff3232" }}
               onPress={() =>
