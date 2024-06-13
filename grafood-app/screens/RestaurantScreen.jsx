@@ -1,13 +1,37 @@
 import React from "react";
 import { useRoute } from "@react-navigation/native";
 import { restaurantList } from "../database/restaurantDB";
-import { Pressable, Text, View, StyleSheet, Image } from "react-native";
+import { pastaPicList, maraPicList } from "../database/foodpicDB";
+import { Pressable, Text, View, StyleSheet, Image, ScrollView } from "react-native";
 import BackButton from "../component/BackButton";
 
 export default function RestaurantScreen({ navigation }) {
   const route = useRoute();
   const { id } = route.params;
   const restaurant = restaurantList.find((rest) => rest.id === id);
+
+  // 랜덤한 사진을 가져오는 함수
+  const getRandomImages = () => {
+    let images = [];
+    if (restaurant.menu === "파스타") {
+      const pastaList = pastaPicList[0]; // pastaPicList의 첫 번째 요소를 사용
+      for (let i = 0; i < restaurant.review; i++) {
+        const keys = Object.keys(pastaList);
+        const randomKey = keys[Math.floor(Math.random() * keys.length)];
+        images.push(pastaList[randomKey]);
+      }
+    } else if (restaurant.menu === "마라탕") {
+      const maraList = maraPicList[0]; // maraPicList의 첫 번째 요소를 사용
+      for (let i = 0; i < restaurant.review; i++) {
+        const keys = Object.keys(maraList);
+        const randomKey = keys[Math.floor(Math.random() * keys.length)];
+        images.push(maraList[randomKey]);
+      }
+    }
+    return images;
+  };
+
+  const randomImages = getRandomImages();
 
   return (
     <View style={styles.container}>
@@ -38,11 +62,12 @@ export default function RestaurantScreen({ navigation }) {
           >
             <Text style={{ color: "#ff3232" }}>Location</Text>
           </Pressable>
-          <Pressable 
-          style={({ pressed }) => [
-            { opacity: pressed ? 0.5 : 1 },
-            styles.button,
-          ]}>
+          <Pressable
+            style={({ pressed }) => [
+              { opacity: pressed ? 0.5 : 1 },
+              styles.button,
+            ]}
+          >
             <Text
               style={{ color: "#ff3232" }}
               onPress={() =>
@@ -54,6 +79,19 @@ export default function RestaurantScreen({ navigation }) {
           </Pressable>
         </View>
       </View>
+
+      {/* 랜덤 이미지 표시 */}
+      <View style={{ marginTop: 20, paddingHorizontal: 20 }}>
+        <ScrollView style={{ width: "100%" }}>
+          {randomImages.map((image, index) => (
+            <Image
+              key={index}
+              source={image}
+              style={{ width: 400, height: 400, marginBottom: 10 }}
+            />
+          ))}
+        </ScrollView>
+      </View>
     </View>
   );
 }
@@ -64,6 +102,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     backgroundColor: "white",
+    paddingTop: 160,
   },
 
   topContainer: {
