@@ -129,7 +129,18 @@ function SearchScreen({ navigation }) {
             <Text style={{ color: "white", fontSize: 16 }}>Search</Text>
           </Pressable>
         </View>
-
+        <View>
+          <Pressable
+            style={styles.navigateButton}
+            onPress={() => {
+              navigation.navigate("Restaurant");
+            }}
+          >
+            <Text style={focused ? { color: "#666666" } : { color: "#a0a0a0" }}>
+            GO_TO_Restaurant
+            </Text>
+          </Pressable>
+        </View>
         <View style={styles.orderContainer}>
           <Pressable onPress={sortListByDistance}>
             <Text style={focused ? { color: "#666666" } : { color: "#a0a0a0" }}>

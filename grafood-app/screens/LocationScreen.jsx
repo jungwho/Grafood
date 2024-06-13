@@ -1,18 +1,25 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import MapView, { Marker } from 'react-native-maps';
 import { StyleSheet, View, TextInput, Button, Alert, Modal, Text, TouchableOpacity, ScrollView, Image } from 'react-native';
 
-export default function LocationScreen() {
+export default function LocationScreen({ route }) {
+  const { restaurantName } = route.params || '';
   const [region, setRegion] = useState({
-    latitude: 37.00406828608903,
-    longitude: 127.229184233665,
+    latitude: 37.5048,
+    longitude: 126.9574,
     latitudeDelta: 0.0922,
     longitudeDelta: 0.0421,
   });
-  const [searchQuery, setSearchQuery] = useState('');
+  const [searchQuery, setSearchQuery] = useState(restaurantName);
   const [placeDetails, setPlaceDetails] = useState(null); // Place details state
   const [modalVisible, setModalVisible] = useState(false); // Modal visibility state
   const mapRef = useRef(null); // Ref for MapView
+
+  useEffect(() => {
+    if (restaurantName) {
+      handleSearch();
+    }
+  }, [restaurantName]);
 
   const onRegionChangeComplete = (newRegion) => {
     setRegion(newRegion);
