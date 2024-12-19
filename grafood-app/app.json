@@ -16,7 +16,6 @@
     },
     "android": {
       "package": "com.grafood.grafood", 
-      "config": { "googleMaps": { "apiKey": "AIzaSyC7zRLjr1x7K70vi2nHPJZg7_OaZMUI3EQ" } },
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
